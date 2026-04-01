@@ -15,7 +15,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import DOMAIN
-from ..base import AccountInfo
+from .providers.base import AccountInfo
 from . import ISPMonitorCoordinator
 
 _LOGGER = logging.getLogger(__name__)

@@ -13,8 +13,8 @@ from homeassistant.exceptions import ConfigEntryAuthFailed, ConfigEntryNotReady
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .const import DOMAIN, CONF_PROVIDER, PLATFORMS
-from ..base import BaseProvider, AccountInfo, AuthenticationError, NetworkError
-from ..providers import TochkaProvider
+from .providers.base import BaseProvider, AccountInfo, AuthenticationError, NetworkError
+from .providers import PointProvider
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -25,7 +25,7 @@ CONFIG_SCHEMA = vol.Schema(
             {
                 vol.Required(CONF_USERNAME): cv.string,
                 vol.Required(CONF_PASSWORD): cv.string,
-                vol.Required(CONF_PROVIDER, default="tochka"): cv.string,
+                vol.Required(CONF_PROVIDER, default="Point"): cv.string,
             }
         )
     },
@@ -44,7 +44,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     
     username = entry.data.get(CONF_USERNAME)
     password = entry.data.get(CONF_PASSWORD)
-    provider_id = entry.data.get(CONF_PROVIDER, "tochka")
+    provider_id = entry.data.get(CONF_PROVIDER, "Point")
     
     # Создаем экземпляр провайдера
     provider = create_provider(provider_id, username, password)
@@ -92,7 +92,7 @@ def create_provider(provider_id: str, login: str, password: str, **kwargs) -> Op
     """Фабрика для создания провайдеров.
     
     Args:
-        provider_id: Идентификатор провайдера ('tochka', 'mts', etc.)
+        provider_id: Идентификатор провайдера ('Point', 'mts', etc.)
         login: Логин
         password: Пароль
         **kwargs: Дополнительные параметры
@@ -101,7 +101,7 @@ def create_provider(provider_id: str, login: str, password: str, **kwargs) -> Op
         Экземпляр провайдера или None если не найден
     """
     providers_map = {
-        "tochka": TochkaProvider,
+        "Point": PointProvider,
         # Здесь можно добавлять других провайдеров
         # "mts": MTSProvider,
         # "beeline": BeelineProvider,

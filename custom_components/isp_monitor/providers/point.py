@@ -5,10 +5,10 @@ from typing import Optional, Dict, Any
 from datetime import datetime
 import aiohttp
 
-from ..base import BaseProvider, AccountInfo, AuthenticationError, NetworkError
+from .base import BaseProvider, AccountInfo, AuthenticationError, NetworkError
 
 
-class TochkaProvider(BaseProvider):
+class PointProvider(BaseProvider):
     """Провайдер Точка Связи.
     
     Использует официальное API: https://cabinet.point.online/customer_api
@@ -18,13 +18,13 @@ class TochkaProvider(BaseProvider):
     - Пароль: пароль от личного кабинета
     
     Пример использования:
-        provider = TochkaProvider(login="15595492", password="your_password")
+        provider = PointProvider(login="15595492", password="your_password")
         async with provider:
             info = await provider.get_account_info()
             print(f"Баланс: {info.balance}")
     """
     
-    provider_id = "tochka"
+    provider_id = "Point"
     provider_name = "Точка Связи"
     
     BASE_URL = "https://cabinet.point.online/customer_api"

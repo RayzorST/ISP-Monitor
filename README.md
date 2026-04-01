@@ -17,7 +17,7 @@ isp_monitor/
 ├── base.py                 # Базовый интерфейс и общие классы
 ├── providers/              # Конкретные реализации провайдеров
 │   ├── __init__.py
-│   └── tochka.py          # Провайдер "Точка Связи"
+│   └── point.py          # Провайдер "Точка Связи"
 ├── integration/            # Интеграция для Home Assistant
 │   ├── __init__.py        # Основная логика интеграции
 │   ├── config_flow.py     # Настройка через UI
@@ -54,10 +54,10 @@ pip install -e .
 
 ```python
 import asyncio
-from isp_monitor.providers import TochkaProvider
+from isp_monitor.providers import PointProvider
 
 async def main():
-    provider = TochkaProvider(login="your_login", password="your_password")
+    provider = PointProvider(login="your_login", password="your_password")
     
     async with provider:
         info = await provider.get_account_info()
@@ -96,14 +96,14 @@ class MyProvider(BaseProvider):
 ```python
 from .myprovider import MyProvider
 
-__all__ = ["TochkaProvider", "MyProvider"]
+__all__ = ["PointProvider", "MyProvider"]
 ```
 
 3. Добавьте в фабрику `integration/__init__.py`:
 
 ```python
 providers_map = {
-    "tochka": TochkaProvider,
+    "Point": PointProvider,
     "myprovider": MyProvider,
 }
 ```
@@ -112,7 +112,7 @@ providers_map = {
 
 ```python
 PROVIDERS = {
-    "tochka": "Точка Связи",
+    "Point": "Точка Связи",
     "myprovider": "Мой Провайдер",
 }
 ```

@@ -10,14 +10,14 @@ from homeassistant.data_entry_flow import FlowResult
 from homeassistant.exceptions import HomeAssistantError
 
 from .const import DOMAIN, CONF_PROVIDER
-from ..base import AuthenticationError, NetworkError
-from ..providers import TochkaProvider
+from .providers.base import AuthenticationError, NetworkError
+from .providers import PointProvider
 
 _LOGGER = logging.getLogger(__name__)
 
 # Список доступных провайдеров
 PROVIDERS = {
-    "tochka": "Точка Связи",
+    "point": "Точка Связи",
     # Можно добавить других провайдеров
     # "mts": "МТС",
     # "beeline": "Билайн",
@@ -68,7 +68,7 @@ class ISPConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         # Форма ввода данных
         data_schema = vol.Schema(
             {
-                vol.Required(CONF_PROVIDER, default="tochka"): vol.In(PROVIDERS),
+                vol.Required(CONF_PROVIDER, default="Point"): vol.In(PROVIDERS),
                 vol.Required(CONF_USERNAME): str,
                 vol.Required(CONF_PASSWORD): str,
             }
@@ -85,8 +85,8 @@ class ISPConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     ) -> bool:
         """Проверка подключения к провайдеру."""
         
-        if provider_id == "tochka":
-            provider = TochkaProvider(login=username, password=password)
+        if provider_id == "Point":
+            provider = PointProvider(login=username, password=password)
         else:
             raise ValueError(f"Unknown provider: {provider_id}")
         

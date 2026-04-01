@@ -9,7 +9,6 @@ from homeassistant.components.sensor import (
     SensorStateClass,
 )
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import UnitOfCurrency
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
@@ -17,7 +16,6 @@ from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from .const import DOMAIN
 from .providers.base import AccountInfo
 from . import ISPMonitorCoordinator
-
 _LOGGER = logging.getLogger(__name__)
 
 
@@ -72,8 +70,6 @@ class ISPBalanceSensor(CoordinatorEntity[ISPMonitorCoordinator], SensorEntity):
     @property
     def native_unit_of_measurement(self) -> str | None:
         """Единица измерения."""
-        if self.coordinator.data is None:
-            return UnitOfCurrency.RUB
         return self.coordinator.data.currency
     
     @property

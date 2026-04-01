@@ -78,7 +78,8 @@ class PointProvider(BaseProvider):
                 result = await response.json()
                 
                 # Проверяем успешность входа
-                if isinstance(result, dict) and result.get("id"):
+                # API возвращает {"sid_customer": "uuid"} при успешной авторизации
+                if isinstance(result, dict) and result.get("sid_customer"):
                     self._authenticated = True
                     return True
                 else:

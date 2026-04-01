@@ -85,7 +85,7 @@ class ISPConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     ) -> bool:
         """Проверка подключения к провайдеру."""
         
-        if provider_id == "Point":
+        if provider_id == "point":
             provider = PointProvider(login=username, password=password)
         else:
             raise ValueError(f"Unknown provider: {provider_id}")

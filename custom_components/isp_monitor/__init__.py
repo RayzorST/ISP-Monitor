@@ -101,7 +101,7 @@ def create_provider(provider_id: str, login: str, password: str, **kwargs) -> Op
         Экземпляр провайдера или None если не найден
     """
     providers_map = {
-        "Point": PointProvider,
+        "point": PointProvider,
         # Здесь можно добавлять других провайдеров
         # "mts": MTSProvider,
         # "beeline": BeelineProvider,

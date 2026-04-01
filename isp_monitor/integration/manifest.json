@@ -1,0 +1,14 @@
+{
+  "domain": "isp_monitor",
+  "name": "ISP Monitor",
+  "version": "0.1.0",
+  "documentation": "https://github.com/yourusername/isp-monitor",
+  "issue_tracker": "https://github.com/yourusername/isp-monitor/issues",
+  "requirements": [
+    "aiohttp>=3.8.0",
+    "beautifulsoup4>=4.12.0"
+  ],
+  "codeowners": ["@yourusername"],
+  "config_flow": true,
+  "iot_class": "cloud_polling"
+}

@@ -1,0 +1,9 @@
+{
+  "entity": {
+    "sensor": {
+      "balance": {
+        "name": "Баланс"
+      }
+    }
+  }
+}
